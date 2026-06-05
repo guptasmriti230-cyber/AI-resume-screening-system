@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Resume</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .upload-section {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .upload-area {
+            border: 2px dashed #667eea;
+            border-radius: 10px;
+            padding: 3rem;
+            text-align: center;
+            cursor: pointer;
+            background: #f9f9f9;
+        }
+        .file-input { display: none; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand"><h1>🤖 ResumeAI</h1></div>
+            <ul class="nav-menu">
+                <li><a href="../index.html">Dashboard</a></li>
+                <li><a href="upload.html" class="active">Upload</a></li>
+                <li><a href="results.html">Results</a></li>
+                <li><a href="analytics.html">Analytics</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="upload-section">
+        <h2>Upload Resumes</h2>
+        <div class="upload-area" id="uploadArea">
+            <div style="font-size: 3rem;">📄</div>
+            <p><strong>Drag resumes here or click</strong></p>
+        </div>
+        <input type="file" id="fileInput" class="file-input" multiple accept=".pdf,.txt,.docx">
+        <div style="margin-top: 2rem; text-align: center;">
+            <button class="btn btn-primary" onclick="uploadFiles()">Analyze</button>
+        </div>
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script>
+        let selectedFiles = [];
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        
+        uploadArea.addEventListener('click', () => fileInput.click());
+        fileInput.addEventListener('change', (e) => {
+            selectedFiles = Array.from(e.target.files);
+            alert(selectedFiles.length + ' file(s) selected');
+        });
+
+        async function uploadFiles() {
+            if (selectedFiles.length === 0) {
+                alert('Select a file first');
+                return;
+            }
+            for (const file of selectedFiles) {
+                await uploadResume(file);
+            }
+            alert('Upload complete!');
+            window.location.href = 'results.html';
+        }
+    </script>
+</body>
+</html>

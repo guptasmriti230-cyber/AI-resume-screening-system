@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Resume Screening System</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <h1>🤖 ResumeAI</h1>
+                <p>Intelligent Resume Screening</p>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="active">Dashboard</a></li>
+                <li><a href="pages/upload.html">Upload</a></li>
+                <li><a href="pages/results.html">Results</a></li>
+                <li><a href="pages/analytics.html">Analytics</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <h2>AI-Powered Resume Screening</h2>
+            <p>Automatically analyze and score resumes with artificial intelligence</p>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3 id="totalResumes">0</h3>
+                    <p>Resumes Processed</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="avgScore">0%</h3>
+                    <p>Average Score</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="topMatch">0%</h3>
+                    <p>Top Match</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="processingTime">0ms</h3>
+                    <p>Processing Speed</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="quick-actions">
+        <div class="container">
+            <h2>Get Started</h2>
+            <div class="action-grid">
+                <div class="action-card" onclick="window.location.href='pages/upload.html'">
+                    <div class="action-icon">📄</div>
+                    <h3>Upload Resume</h3>
+                    <p>Add a single resume or batch upload multiple files</p>
+                </div>
+                <div class="action-card" onclick="setupJobDescription()">
+                    <div class="action-icon">📋</div>
+                    <h3>Set Job Description</h3>
+                    <p>Paste job requirements for matching</p>
+                </div>
+                <div class="action-card" onclick="window.location.href='pages/analytics.html'">
+                    <div class="action-icon">📊</div>
+                    <h3>View Analytics</h3>
+                    <p>See detailed analysis and insights</p>
+                </div>
+                <div class="action-card" onclick="exportResults()">
+                    <div class="action-icon">💾</div>
+                    <h3>Export Results</h3>
+                    <p>Download results as CSV or JSON</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="jobModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeJobModal()">&times;</span>
+            <h2>Set Job Description</h2>
+            <textarea id="jobDescription" placeholder="Paste job description here..." rows="10"></textarea>
+            <div class="modal-buttons">
+                <button class="btn btn-primary" onclick="saveJobDescription()">Save Job</button>
+                <button class="btn btn-secondary" onclick="closeJobModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <section class="recent-analysis">
+        <div class="container">
+            <h2>Recent Candidates</h2>
+            <div id="recentCandidates" class="candidate-list">
+                <p style="text-align: center; color: #999; padding: 2rem;">No candidates analyzed yet</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2024 AI Resume Screening System. All rights reserved.</p>
+    </footer>
+
+    <script src="js/api.js"></script>
+    <script src="js/analyzer.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

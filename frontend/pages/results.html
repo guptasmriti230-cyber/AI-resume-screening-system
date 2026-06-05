@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand"><h1>🤖 ResumeAI</h1></div>
+            <ul class="nav-menu">
+                <li><a href="../index.html">Dashboard</a></li>
+                <li><a href="upload.html">Upload</a></li>
+                <li><a href="results.html" class="active">Results</a></li>
+                <li><a href="analytics.html">Analytics</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div style="max-width: 1000px; margin: 3rem auto; padding: 2rem;">
+        <h2>Screening Results</h2>
+        <div id="results" style="background: white; padding: 2rem; border-radius: 10px; margin-top: 2rem;">
+            <p style="text-align: center; color: #999;">Loading results...</p>
+        </div>
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script>
+        async function loadResults() {
+            const resumes = await getAllResumes();
+            const div = document.getElementById('results');
+            if (resumes.length === 0) {
+                div.innerHTML = '<p style="text-align: center; color: #999;">No resumes analyzed</p>';
+                return;
+            }
+            div.innerHTML = resumes.map((r, i) => `
+                <div style="padding: 1rem; border-bottom: 1px solid #eee;">
+                    <strong>#${i+1}: ${r.name || 'Candidate'}</strong> - Score: ${r.score}%
+                </div>
+            `).join('');
+        }
+        loadResults();
+    </script>
+</body>
+</html>
